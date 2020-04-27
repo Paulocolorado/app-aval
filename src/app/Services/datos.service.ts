@@ -54,18 +54,18 @@ export class DatosService {
   }
 
   GetTiposDocumento() {
-    /* this.tiposDocumento = [
+     this.tiposDocumento = [
       { id: 'cc', nombre: 'Cédula de ciudadanía' },
       { id: 'ce', nombre: 'Cédula de extranjería' },
       { id: 'nit', nombre: 'NIT' },
       { id: 'pas', nombre: 'Pasaporte' },
       { id: 'ti', nombre: 'Tarjeta Identidad' },
       { id: 'nip', nombre: 'Numero de Identificación Personal' },
-    ];*/
-    this.tiposDocumento = [
-      { id: 'ine', nombre: 'INE' },
-      { id: 'pas', nombre: 'Pasaporte' }
     ];
+    // this.tiposDocumento = [
+    //   { id: 'ine', nombre: 'INE' },
+    //   { id: 'pas', nombre: 'Pasaporte' }
+    // ];
     return this.tiposDocumento;
   }
 
