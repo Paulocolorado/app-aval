@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light " style="background-color: #1F4E78;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light " style="background-color: #ff6600;">
   <div class="container">
     <a class="navbar-brand"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -22,8 +22,8 @@
   </div>
 </nav>
 <a routerLink="">
-  <img *ngIf="ima1" class="logo fixed-top" src="/app-asamblea/assets/images/logo-am.jpeg" alt="Logo grupo Aval">
-  <img *ngIf="ima2" class="logo2 fixed-top" src="/app-asamblea/assets/images/logo-am.jpeg" alt="Logo grupo Aval">
+  <img *ngIf="ima1" class="logo fixed-top" src="/app-asamblea/assets/images/logo-am.jpeg" onError="this.src='../../../assets/images/logo-am.jpeg'" alt="Logo Compensar">
+  <img *ngIf="ima2" class="logo2 fixed-top" src="/app-asamblea/assets/images/logo-am.jpeg" onError="this.src='../../../assets/images/logo-am.jpeg'" alt="Logo Compensar">
   <!--img class="logo fixed-top" src="../../../assets/images/logo-am.jpeg" alt="Logo grupo Aval"-->
 </a>
 <!--div *ngIf="estadoUsuario()"></div-->
