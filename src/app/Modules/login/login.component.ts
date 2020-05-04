@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatosService } from 'src/app/Services/datos.service';
 import { RespUsuario } from 'src/app/Models/resp-usuario';
 import { RespIp } from 'src/app/Models/resp-ip';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ import { RespIp } from 'src/app/Models/resp-ip';
 export class LoginComponent implements OnInit {
 
   // VARIABLES
+  selectedFile: File = null;
+
   botonInvitado = { texto: 'Invitado', estado: true };
   botonIngresar = { texto: 'Ingresar', estado: false };
   documento = { numero: '', tipo: '', estado: false };
@@ -20,7 +23,7 @@ export class LoginComponent implements OnInit {
   respuestaLogueo: RespUsuario;
   respuestaIP: RespIp;
 
-  constructor(public Datos: DatosService) { }
+  constructor(public Datos: DatosService, private http: HttpClient) { }
 
   ngOnInit() { }
 
@@ -132,5 +135,19 @@ async  valIninvitado() {
       this.botonIngresar.texto = 'Nuevo intento';
       this.valIngreso();
     }
+  }
+
+  onFileSelected(event) {
+    this.selectedFile = event.target.files[0];
+    console.log(event);
+  }
+
+  onUpload(){
+    const fd = new FormData();
+    fd.append('file', this.selectedFile, this.selectedFile.name);
+    this.http.post('http://181.51.21.177/WsAsambleaAval-Prod/api/shareHolder/upload-csv-file', fd)
+    .subscribe(res => {
+      console.log(res);
+    })
   }
 }

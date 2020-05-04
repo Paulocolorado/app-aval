@@ -13,6 +13,8 @@ declare var $: any;
 })
 export class ControlComponent implements OnInit {
 
+  // selectedFile: File = null;
+
   numacccion = localStorage.getItem('numaccion');
 
   mensaje = { mensaje: '', color: '', estado: false };
@@ -125,4 +127,14 @@ export class ControlComponent implements OnInit {
       this.mensaje.estado = false;
     }, 8000);
   }
+
+  // onFileSelected(event) {
+  //   this.Datos.selectedFile = event.target.files[0];
+  //   console.log(event);
+  // }
+
+  // onUpload(){
+  //   this.Datos.PostUploadFile();
+  // }
+
 }
