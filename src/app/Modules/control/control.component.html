@@ -23,7 +23,7 @@
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Crear y listar preguntas
+          Cargar archivo de preguntas
         </button>
       </h2>
     </div>
@@ -31,8 +31,30 @@
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
 
+        <div>
+          <h4>Cargar Archivo de preguntas</h4>
+          <h5>El formato correcto de carga del archivo es: .csv</h5>
+          <input type="file" (change)="onFileSelectedQuest($event)">
+          <button type="button" (click)="onUploadQuest()">Cargar</button>
+        </div> 
 
+        
 
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Crear y listar las preguntas.
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">       
+               
         <div class="mb-3 text-right">
           <button [disabled]="!botonCrear.estado" data-toggle="modal" data-target=".modal-crear" class="btn btn-primary">{{botonCrear.texto}}</button>
         </div>
@@ -70,40 +92,74 @@
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Cargar archivo de usuarios
-        </button>
-      </h2>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        
-        <div>
-          <h1>Cargar Archivo de usuarios</h1>
-          <input type="file" (change)="onFileSelected($event)">
-          <button type="button" (click)="onUpload()">Cargar</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
+
   <div class="card">
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Ver resultados de las votaciones
+          Cargar Archivo de usuario
         </button>
       </h2>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+        <div>
+          <h2>Cargar Archivo de usuarios</h2>
+          <input type="file" (change)="onFileSelected($event)">
+          <button type="button" (click)="onUpload()">Cargar</button>
+        </div> 
+
       </div>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Consulta de respuestas
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body">       
+
+        <div class="table-responsive border border-primary rounded">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">ID</th>
+                <th scope="col">Pregunta</th>
+                <th scope="col">Observaciones</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of respuestaPreguntas" class="text-center">
+                <th scope="row">{{p.pregunta}}</th>
+                <td class="text-left">{{p.descPregunta}}</td>
+                <td>{{p.observaciones}}</td>
+                <td>
+                  <div *ngIf="p.estado === 'A'; else inactiva">
+                    <h6 class="text-success">Activa</h6>
+                  </div>
+                  <ng-template #inactiva>
+                    <h6 class="text-danger">Inactiva</h6>
+                  </ng-template>
+                </td>
+                <td><button [disabled]="!botonActivar.estado" (click)="activarPregunta(p)" *ngIf="p.estado === 'D'"
+                    class="btn btn-success">{{botonActivar.texto}}</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>
 <!-- End collapsible -->
 

@@ -138,8 +138,54 @@ export class ControlComponent implements OnInit {
     const fd = new FormData();
     fd.append('file', this.selectedFile, this.selectedFile.name);
     this.http.post('http://181.51.21.177/WsAsambleaAval-Prod/api/shareHolder/upload-csv-file', fd)
-    .subscribe(res => {
-      console.log(res);
+    .subscribe(res => {     
+      res = Object.values(res)[0];
+      res = JSON.stringify(res);
+      let succesMsg = '"200"';
+   
+      if (res==succesMsg){
+        this.mensaje = {
+          mensaje: 'Se realizó la carga de las usuarios de manera exitosa.',
+          color: 'alert-success',
+          estado: true,
+        }        
+      }else {
+        this.mensaje = {
+          mensaje: 'Por favor verifique el archivo que se esta cargando',
+          color: 'alert-danger',
+          estado: true,
+        }
+      }
+    })
+  }
+
+  onFileSelectedQuest(event) {
+    this.selectedFile = event.target.files[0];
+    console.log(event);
+  }
+
+  onUploadQuest(){
+    const fd = new FormData();
+    fd.append('file', this.selectedFile, this.selectedFile.name);
+    this.http.post('http://181.51.21.177/WsAsambleaAval-Prod/api/AssemblyQuestion/upload-csv-file', fd)
+    .subscribe(res => {     
+      res = Object.values(res)[0];
+      res = JSON.stringify(res);
+      let succesMsg = '"200"';
+   
+      if (res==succesMsg){
+        this.mensaje = {
+          mensaje: 'Se realizó la carga de las preguntas de manera exitosa.',
+          color: 'alert-success',
+          estado: true,
+        }        
+      }else {
+        this.mensaje = {
+          mensaje: 'Por favor verifique el archivo que se esta cargando',
+          color: 'alert-danger',
+          estado: true,
+        }
+      }
     })
   }
 
