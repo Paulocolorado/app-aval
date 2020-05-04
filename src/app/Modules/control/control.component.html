@@ -81,6 +81,11 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
         
+        <div>
+          <h1>Cargar Archivo de usuarios</h1>
+          <input type="file" (change)="onFileSelected($event)">
+          <button type="button" (click)="onUpload()">Cargar</button>
+        </div>
         
       </div>
     </div>

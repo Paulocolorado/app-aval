@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent implements OnInit {
 
   // VARIABLES
-  selectedFile: File = null;
+  // selectedFile: File = null;
 
   botonInvitado = { texto: 'Invitado', estado: true };
   botonIngresar = { texto: 'Ingresar', estado: false };
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   respuestaLogueo: RespUsuario;
   respuestaIP: RespIp;
 
-  constructor(public Datos: DatosService, private http: HttpClient) { }
+  constructor(public Datos: DatosService) { }
 
   ngOnInit() { }
 
@@ -137,17 +137,17 @@ async  valIninvitado() {
     }
   }
 
-  onFileSelected(event) {
-    this.selectedFile = event.target.files[0];
-    console.log(event);
-  }
+  // onFileSelected(event) {
+  //   this.selectedFile = event.target.files[0];
+  //   console.log(event);
+  // }
 
-  onUpload(){
-    const fd = new FormData();
-    fd.append('file', this.selectedFile, this.selectedFile.name);
-    this.http.post('http://181.51.21.177/WsAsambleaAval-Prod/api/shareHolder/upload-csv-file', fd)
-    .subscribe(res => {
-      console.log(res);
-    })
-  }
+  // onUpload(){
+  //   const fd = new FormData();
+  //   fd.append('file', this.selectedFile, this.selectedFile.name);
+  //   this.http.post('http://181.51.21.177/WsAsambleaAval-Prod/api/shareHolder/upload-csv-file', fd)
+  //   .subscribe(res => {
+  //     console.log(res);
+  //   })
+  // }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatosService } from 'src/app/Services/datos.service';
 import { RespPregunta } from 'src/app/Models/resp-pregunta';
 import { ReqPregunta } from 'src/app/Models/req-pregunta';
+import { HttpClient } from '@angular/common/http';
 
 declare var jQuery: any;
 declare var $: any;
@@ -13,7 +14,7 @@ declare var $: any;
 })
 export class ControlComponent implements OnInit {
 
-  // selectedFile: File = null;
+  selectedFile: File = null;
 
   numacccion = localStorage.getItem('numaccion');
 
@@ -26,7 +27,7 @@ export class ControlComponent implements OnInit {
 
   respuestaActualizar: RespPregunta;
 
-  constructor(private Datos: DatosService) { }
+  constructor(private Datos: DatosService, private http: HttpClient) { }
 
   ngOnInit() {
     this.listaPreguntas();
@@ -128,13 +129,18 @@ export class ControlComponent implements OnInit {
     }, 8000);
   }
 
-  // onFileSelected(event) {
-  //   this.Datos.selectedFile = event.target.files[0];
-  //   console.log(event);
-  // }
+  onFileSelected(event) {
+    this.selectedFile = event.target.files[0];
+    console.log(event);
+  }
 
-  // onUpload(){
-  //   this.Datos.PostUploadFile();
-  // }
+  onUpload(){
+    const fd = new FormData();
+    fd.append('file', this.selectedFile, this.selectedFile.name);
+    this.http.post('http://181.51.21.177/WsAsambleaAval-Prod/api/shareHolder/upload-csv-file', fd)
+    .subscribe(res => {
+      console.log(res);
+    })
+  }
 
 }
