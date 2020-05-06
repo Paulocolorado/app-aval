@@ -30,7 +30,7 @@ export class DatosService {
   }
 
   GetQuestion() {
-    const URL = '/WsAsambleaAval-Prod/api/AssemblyQuestion';
+    const URL = 'http://181.51.21.177/WsAsambleaAval-Prod/api/AssemblyQuestion';
     return this.http.get(URL);
   }
 
@@ -67,6 +67,11 @@ export class DatosService {
     //   { id: 'pas', nombre: 'Pasaporte' }
     // ];
     return this.tiposDocumento;
+  }
+
+  GetResults() {
+    const URL = 'http://181.51.21.177/WsAsambleaAval-Prod/api/QuestionXAction/results';
+    return this.http.get(URL);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosService } from 'src/app/Services/datos.service';
-import { RespPregunta } from 'src/app/Models/resp-pregunta';
+import { RespPregunta, results } from 'src/app/Models/resp-pregunta';
 import { ReqPregunta } from 'src/app/Models/req-pregunta';
 import { HttpClient } from '@angular/common/http';
 
@@ -25,6 +25,8 @@ export class ControlComponent implements OnInit {
 
   respuestaPreguntas = [] as RespPregunta[];
 
+  resultados = [] as results[];
+
   respuestaActualizar: RespPregunta;
 
   constructor(private Datos: DatosService, private http: HttpClient) { }
@@ -38,6 +40,10 @@ export class ControlComponent implements OnInit {
     try {
       respuesta = await this.Datos.GetQuestion().toPromise();
       this.respuestaPreguntas = respuesta;
+      console.log(respuesta);
+      console.log(typeof respuesta);
+      
+      
     } catch (e) {
       this.mensaje = {
         mensaje: 'Error en la consulta de las preguntas. Recargue o consulte con el administrador.',
@@ -131,13 +137,37 @@ export class ControlComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
-    console.log(event);
   }
 
-  onUpload(){
+  uploadShareholders(){
     const fd = new FormData();
     fd.append('file', this.selectedFile, this.selectedFile.name);
     this.http.post('http://181.51.21.177/WsAsambleaAval-Prod/api/shareHolder/upload-csv-file', fd)
+    .subscribe(res => {     
+      res = Object.values(res)[0];
+      res = JSON.stringify(res);
+      let succesMsg = '"200"';
+   
+      if (res==succesMsg){
+        this.mensaje = {
+          mensaje: 'Se realizó la carga de las usuarios de manera exitosa.',
+          color: 'alert-success',
+          estado: true,
+        }        
+      }else {
+        this.mensaje = {
+          mensaje: 'Por favor verifique el archivo que se esta cargando',
+          color: 'alert-danger',
+          estado: true,
+        }
+      }
+    })
+  }
+
+  uploadAgents(){
+    const ua = new FormData();
+    ua.append('file', this.selectedFile, this.selectedFile.name);
+    this.http.post('http://181.51.21.177/WsAsambleaAval-Prod/api/AttorneyXShareHolder/upload-csv-file', ua)
     .subscribe(res => {     
       res = Object.values(res)[0];
       res = JSON.stringify(res);
@@ -174,6 +204,7 @@ export class ControlComponent implements OnInit {
       let succesMsg = '"200"';
    
       if (res==succesMsg){
+        this.listaPreguntas();
         this.mensaje = {
           mensaje: 'Se realizó la carga de las preguntas de manera exitosa.',
           color: 'alert-success',
@@ -189,4 +220,17 @@ export class ControlComponent implements OnInit {
     })
   }
 
+  async cargarResultados() {
+    let respuesta: any;
+    try {
+      respuesta = await this.Datos.GetResults().toPromise();
+      this.resultados = respuesta.results;      
+    } catch (e) {
+      this.mensaje = {
+        mensaje: 'Error en la consulta de los resultados. Recargue o consulte con el administrador.',
+        color: 'alert-danger',
+        estado: true,
+      };
+    }
+  }
 }

@@ -9,3 +9,12 @@ export interface RespPregunta {
   fehModifica: string;
   userMod: string;
 }
+
+export interface results {
+ idPregunta: number;
+ descPregunta: string;
+ aprobado: number;
+ noAprobado: number;
+ meAbstengo: number;
+}
+
