@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
         respuestaIP = IP;
       } catch (e) { respuestaIP = { ip: '0.0.0.0' }; }   
       let ipSend = respuestaIP.ip + '%3Bcan';
-      console.log(tip +" "+ num +" "+ accion +" "+ ipSend);
+      // console.log(tip +" "+ num +" "+ accion +" "+ ipSend);
       respuesta = await this.Datos.GetLogueo(tip, num, accion, ipSend).toPromise();
     } catch (e) { e.console.error();}
     //setTimeout(() => {

@@ -88,6 +88,9 @@ async  valIninvitado() {
           localStorage.setItem('pantalla', 'control');
           localStorage.setItem('usuario', this.respuestaLogueo.shareHolder.nombresApellidos);
           localStorage.setItem('numaccion', this.respuestaLogueo.shareHolder.numeroAccion);
+          localStorage.setItem('tipDoc', tip);
+          localStorage.setItem('numDoc', num);
+          localStorage.setItem('accion', accion);
         } else {
           localStorage.setItem('pantalla', 'asamblea');
           localStorage.setItem('autoriza', this.respuestaLogueo.shareHolder.autoriza + '');

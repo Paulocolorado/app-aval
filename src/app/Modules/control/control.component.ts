@@ -40,8 +40,8 @@ export class ControlComponent implements OnInit {
     try {
       respuesta = await this.Datos.GetQuestion().toPromise();
       this.respuestaPreguntas = respuesta;
-      console.log(respuesta);
-      console.log(typeof respuesta);
+      // console.log(respuesta);
+      // console.log(typeof respuesta);
       
       
     } catch (e) {
@@ -73,7 +73,7 @@ export class ControlComponent implements OnInit {
       respuesta = await this.Datos.PutActualizarPre(body).toPromise();
       this.respuestaActualizar = respuesta;
       this.listaPreguntas();
-      console.log(this.respuestaActualizar);
+      // console.log(this.respuestaActualizar);
       this.mensaje = {
         mensaje: 'La pregunta ' + pregunta.pregunta + ' fue actualizada correctamente.',
         color: 'alert-success',
@@ -191,7 +191,7 @@ export class ControlComponent implements OnInit {
 
   onFileSelectedQuest(event) {
     this.selectedFile = event.target.files[0];
-    console.log(event);
+    // console.log(event);
   }
 
   onUploadQuest(){
